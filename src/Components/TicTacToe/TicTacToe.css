@@ -60,3 +60,11 @@
     padding:20px 20px;
     height: 50px;
 }
+.score_board{
+    margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}

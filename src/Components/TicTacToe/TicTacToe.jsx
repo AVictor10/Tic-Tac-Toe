@@ -7,6 +7,8 @@ const TicTacToe = () => {
   let[count,setCount]=useState(0);
 
   let[lock,setLock]=useState(false);
+  let[xwins,setXwins]=useState(0);
+  let[owins,setOwins]=useState(0);
 
   let titleRef=useRef(null);
   let box1=useRef(null);
@@ -77,33 +79,40 @@ const TicTacToe = () => {
   }
   const won =(winner) => {
     setLock(true);
-    if(winner === "X")
-    {
-      titleRef.current.innerHTML=`Congratulations: <img src=${cross_icon}>`;
-    }
-    else{
-      titleRef.current.innerHTML=`Congratulations: <img src=${circle_icon}>`;
-    }
+   titleRef.current.innerHTML=`Congratulations:<img src= ${winner === "X"} ? cross_icon: circle_icon`;
+   if(winner === "X")
+   {
+    setXwins(prev=>prev+1);
+   }
+   else if(winner==="O"){
+    setOwins(prev=>prev+1);
+   }
   }
 
   const reset =() => {
     setLock(false);
      data=["", "", "", "", "", "", "", "", ""];
-     titleRef.current.innerHTML='Tic Tac Toe in <span>Reacr</span>'
+     titleRef.current.innerHTML='Tic Tac Toe in <span>React</span>'
      box_array.map((w) =>{
       w.current.innerHTML=""; 
      }
     )
   }
 
+
   return (
     <div className='container'>
         <h1 className="title" ref={titleRef}>Tic-Tac-Toe game in <span>React</span></h1>
+
+        <div className="score-board">
+         <p>X Wins: {xwins}</p>
+         <p>O Wins: {owins}</p>
+       </div>
         <div className="board">
           <div className="row1">
             <div className="boxes" ref={box1} onClick={(w)=> {toggle(w,0)}}></div>
-            <div className="boxes" ref={box2} onClick={(w)=> {toggle(w,2)}}></div>
-            <div className="boxes" ref={box3} onClick={(w)=> {toggle(w,1)}}></div>
+            <div className="boxes" ref={box2} onClick={(w)=> {toggle(w,1)}}></div>
+            <div className="boxes" ref={box3} onClick={(w)=> {toggle(w,2)}}></div>
           </div>
           <div className="row2">
             <div className="boxes" ref={box4} onClick={(w)=> {toggle(w,3)}}></div>
